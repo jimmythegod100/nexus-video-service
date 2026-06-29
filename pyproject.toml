@@ -1,0 +1,59 @@
+[tool.poetry]
+name = "nexus-video-service"
+version = "0.1.0"
+description = "FastAPI orchestrator for NEXUS video generation pipeline"
+authors = ["NEXUS Team"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.104.0"
+uvicorn = "^0.24.0"
+pydantic = "^2.0"
+pydantic-settings = "^2.0"
+httpx = "^0.25.0"
+celery = "^5.3"
+redis = "^5.0"
+python-dotenv = "^1.0"
+structlog = "^23.1"
+prometheus-client = "^0.18"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4"
+pytest-asyncio = "^0.21"
+pytest-cov = "^4.1"
+ruff = "^0.1"
+black = "^23.11"
+isort = "^5.12"
+mypy = "^1.7"
+bandit = "^1.7"
+
+[tool.poetry.scripts]
+nexus-video-service = "src.main:run"
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "B", "I"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "--cov=src --cov-report=term-missing"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
